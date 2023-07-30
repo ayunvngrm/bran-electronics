@@ -1,21 +1,40 @@
 <!DOCTYPE html>
 
 <?php
-  require_once "connection.php";
+  require_once "models/auth.php";
+  
+  $loginController = new Login();
+  $error_message;
+  
+  if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["username"]) && isset($_POST["password"])) {
+    $username_input = $_POST["username"];
+    $password_input = $_POST["password"];
+    
+    if (empty($username_input) || empty($password_input)) {
+      $error_message = "Username and password are required.";
+    } else {
+      if ($loginController->authenticate($username_input, $password_input)) {
+        header("Location: /tugas3/dashboard.php");
+        exit();
+      } else {
+        $error_message = "Invalid username or password. Please try again.";
+      }
+    }
+  }
 ?>
 
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
     <title>Login</title>
   </head>
 
   <body>
     <div class="main">
       <div class="container b-container" id="b-container">
-        <form class="form" id="b-form" method="post" action="">
+        <form class="form" id="b-form" method="post">
           <h2 class="form_title title">Sign in to Website</h2>
           <div class="form__icons">
             <img class="form__icon" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSI1MHB4IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48dGl0bGUvPjxkZWZzLz48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIj48ZyBmaWxsPSIjMDAwMDAwIiBpZD0iRmFjZWJvb2siPjxwYXRoIGQ9Ik0yNSw1MCBDMzguODA3MTE5NCw1MCA1MCwzOC44MDcxMTk0IDUwLDI1IEM1MCwxMS4xOTI4ODA2IDM4LjgwNzExOTQsMCAyNSwwIEMxMS4xOTI4ODA2LDAgMCwxMS4xOTI4ODA2IDAsMjUgQzAsMzguODA3MTE5NCAxMS4xOTI4ODA2LDUwIDI1LDUwIFogTTI1LDQ3IEMzNy4xNTAyNjUxLDQ3IDQ3LDM3LjE1MDI2NTEgNDcsMjUgQzQ3LDEyLjg0OTczNDkgMzcuMTUwMjY1MSwzIDI1LDMgQzEyLjg0OTczNDksMyAzLDEyLjg0OTczNDkgMywyNSBDMywzNy4xNTAyNjUxIDEyLjg0OTczNDksNDcgMjUsNDcgWiBNMjYuODE0NTE5NywzNiBMMjYuODE0NTE5NywyNC45OTg3MTIgTDMwLjA2ODc0NDksMjQuOTk4NzEyIEwzMC41LDIxLjIwNzYwNzIgTDI2LjgxNDUxOTcsMjEuMjA3NjA3MiBMMjYuODIwMDQ4NiwxOS4zMTAxMjI3IEMyNi44MjAwNDg2LDE4LjMyMTM0NDIgMjYuOTIwNzIwOSwxNy43OTE1MzQxIDI4LjQ0MjU1MzgsMTcuNzkxNTM0MSBMMzAuNDc2OTYyOSwxNy43OTE1MzQxIEwzMC40NzY5NjI5LDE0IEwyNy4yMjIyNzY5LDE0IEMyMy4zMTI4NzU3LDE0IDIxLjkzNjg2NzgsMTUuODM5MDkzNyAyMS45MzY4Njc4LDE4LjkzMTg3MDkgTDIxLjkzNjg2NzgsMjEuMjA4MDM2NiBMMTkuNSwyMS4yMDgwMzY2IEwxOS41LDI0Ljk5OTE0MTMgTDIxLjkzNjg2NzgsMjQuOTk5MTQxMyBMMjEuOTM2ODY3OCwzNiBMMjYuODE0NTE5NywzNiBaIE0yNi44MTQ1MTk3LDM2IiBpZD0iT3ZhbC0xIi8+PC9nPjwvZz48L3N2Zz4=" alt="">
@@ -33,8 +52,11 @@
         <div class="switch__circle"></div>
         <div class="switch__circle switch__circle--t"></div>
         <div class="switch__container" id="switch-c1">
-        <h2 class="switch__title title">Welcome Back !</h2>
-        <p class="switch__description description">To keep connected with us please login with your account</p>
+          <h2 class="switch__title title">Bran.</h2>
+          <p class="switch__description description">Ayu Prihatini N.R - 2602306073</p>
+          <p class="switch__description description">Muhammad Basith Z.A.A - 2602308444</p>
+          <p class="switch__description description">Pramadika Nauval S - 2602991046</p>
+          <p class="switch__description description">Muhammad Rizki Saputra - 2602292093</p>
         </div>
       </div>
     </div>

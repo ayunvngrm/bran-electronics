@@ -8,7 +8,7 @@
   if (isset($_SESSION['valid_token'])) {
 
     $salesManager = new SalesManager();
-    $sales = $salesManager->getAllSales();
+    $sales = $salesManager->getProfitSales();
 
     if (isset($_SESSION['nama_pengguna'])) {
       $nama_pengguna = $_SESSION['nama_pengguna'];
@@ -45,7 +45,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles/dash.css">
-    <title>Dashboard</title>
+    <title>Analytics</title>
   </head>
 
   <body>
@@ -64,9 +64,9 @@
           <div class="sidebar-menu">
             <ul>
               <li><a href="#"><span class="las la-adjust"></span><span>Dashboard</span></a></li>
-              <li><a href="#" class="active"><span class="las la-video"></span><span>Sales</span></a></li>
+              <li><a href="dashboard.php"><span class="las la-video"></span><span>Sales</span></a></li>
               <li><a href="#"><span class="las la-chart-bar"></span><span>Purchases</span></a></li>
-              <li><a href="analytics.php"><span class="las la-calendar"></span><span>Analytics</span></a></li>
+              <li><a href="analytics.php" class="active"><span class="las la-calendar"></span><span>Analytics</span></a></li>
             </ul>
           </div>
         </div>
@@ -80,7 +80,7 @@
       <header>
         <div class="header-wrapper">
           <div class="header-title">
-            <h1>Sales</h1>
+            <h1>Analytics</h1>
           </div>
         </div>
         <div class="header-right">
@@ -94,38 +94,30 @@
       </header>
 
       <main>
-        <section class="overview">
+        <!-- <section class="overview">
           <h1>Good Afternoon!</h1>
           <p>You now login as <b><?= $nama_pengguna ?></b>. Your role is a <?= $access ?>.<p>
-        </section>
+        </section> -->
         <section class="table-container">
-          <a class="btn-container" href="add_sales.php"><Button class="btn-add">Add New Sales</Button></a>
+          <!-- <a class="btn-container" href="add_sales.php"><Button class="btn-add">Add New Sales</Button></a> -->
           <table class="rwd-table">
             <tr>
               <th>Product Name</th>
-              <th>Sales</th>
-              <th>Price</th>
-              <th>Total Price</th>
-              <?php if ($access === 'editor'): ?>
-                <th>Action</th>
-              <?php endif; ?>
+              <th>Sales Price</th>
+              <th>Purchase Price</th>
+              <th>Profit</th>
+              <th>Status</th>
             </tr>
             <?php
               if (!empty($sales)) {
                 foreach ($sales as $sale) {
+                    
                   echo "<tr>";
                   echo "<td>" . $sale["nama_barang"] . "</td>";
-                  echo "<td>" . $sale["jumlah_penjualan"] . " Pcs" . "</td>";
                   echo "<td>" . $sale["harga_jual"] . "</td>";
-                  echo "<td>" . $sale["harga_jual"] * $sale["jumlah_penjualan"]. "</td>";
-                  $id_penjualan= $sale["id_penjualan"];
-                  if ($access === 'editor') {
-                    echo "<td>
-                    <a href='edit.php?id_penjualan=$id_penjualan' class=action-table>Edit Data</a>
-                    <span class=divider-col>|</span>
-                    <a href='?id_penjualan=$id_penjualan' class=action-table>Delete</a>
-                    </td>";
-                  }
+                  echo "<td>" . $sale["harga_beli"] . "</td>";
+                  echo "<td>" . $sale["keuntungan"] . "</td>";
+                  echo "<td>" . $sale["status"] . "</td>";
                   echo "</tr>";
                   }
                 } else {

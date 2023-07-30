@@ -1,10 +1,10 @@
 <?php
   session_start();
 
-  $hostname = 'localhost';        
-  $database = 'tk3_bran';    
-  $username = 'root';    
-  $password = '';   
+  $hostname = "localhost";        
+  $database = "db_tk4_bran";    
+  $username = "root";    
+  $password = "";   
 
   $mysqli = new mysqli($hostname, $username, $password, $database);
 
@@ -49,6 +49,5 @@
     }
     
     $stmt->close();
-    $mysqli->close();
   }
 ?>
