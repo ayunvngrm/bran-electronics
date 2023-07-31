@@ -14,5 +14,5 @@
   
   $conn->query($sql);
   
-  header("Location: /tugas3/dashboard.php");  
+  header("Location: /bran-electronics/dashboard.php");  
 ?>

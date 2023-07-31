@@ -14,7 +14,7 @@
       $error_message = "Username and password are required.";
     } else {
       if ($loginController->authenticate($username_input, $password_input)) {
-        header("Location: /tugas3/dashboard.php");
+        header("Location: /bran-electronics/dashboard.php");
         exit();
       } else {
         $error_message = "Invalid username or password. Please try again.";

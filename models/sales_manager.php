@@ -22,7 +22,7 @@ require_once "connect.php";
         $stmt->bind_param("iiss", $jumlah, $total, $nama_pelanggan, $nama_barang);
         
         if ($stmt->execute()) {
-          header("Location: /tugas3/dashboard.php");
+          header("Location: /bran-electronics/dashboard.php");
         } else {
           echo("failed");
         }
@@ -40,7 +40,7 @@ require_once "connect.php";
         $stmt->bind_param("sssss", $jumlah, $total, $nama_pelanggan, $nama_barang, $id_penjualan);
         
         if ($stmt->execute()) {
-          header("Location: /tugas3/dashboard.php");
+          header("Location: /bran-electronics/dashboard.php");
         } else {
           echo("failed");
         }
